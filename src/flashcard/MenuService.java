@@ -132,8 +132,12 @@ public class MenuService implements IMenuService {
 			try
 			{
 				int chosenIndex = Integer.parseInt(choice);
-				Flashcard flashcard = _fcService.GetFlashcards().get(chosenIndex);
-				_fcService.RemoveFlashcard(flashcard);
+				List<Flashcard> flashcards = _fcService.GetFlashcards();
+				if (chosenIndex >= 0 && chosenIndex < flashcards.size())
+				{
+					Flashcard flashcard = flashcards.get(chosenIndex);
+					_fcService.RemoveFlashcard(flashcard);					
+				}
 			}
 			catch(NumberFormatException e)
 			{
@@ -197,6 +201,10 @@ public class MenuService implements IMenuService {
 							break;
 					}
 				}
+			}
+			else
+			{
+				break;
 			}
 		}
 		
